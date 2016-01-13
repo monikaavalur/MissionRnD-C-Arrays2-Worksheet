@@ -15,13 +15,54 @@ NOTES:
 */
 
 #include <iostream>
-
+#include<stdio.h>
+#include<stdlib.h>
 struct transaction {
 	int amount;
 	char date[11];
 	char description[20];
 };
-
-struct transaction * sortedArraysCommonElements(struct transaction *A, int ALen, struct transaction *B, int BLen) {
-	return NULL;
+int convert(char *);
+struct transaction * sortedArraysCommonElements(struct transaction *A, int ALen, struct transaction *B, int BLen)
+{
+	if (A == NULL || B == NULL)
+		return NULL;
+	int count = 0;
+	struct student *temp;
+	for (int i = 0; i < ALen; i++)
+	{
+		int date1 = convert(A[i].date);
+		int date2 = convert(B[i].date);
+		if (date1 == date2)
+			count++;
+	}
+	if (count == ALen)
+		return A;
+	if (count == 0)
+		return NULL;
+	else
+	{
+		for (int i = 0; i < ALen; i++)
+		{
+			for (int j = 0; j < BLen; j++)
+			{
+				int date1 = convert(A[i].date);
+				int date2 = convert(B[j].date);
+				if (date1 == date2)
+					return B;
+			}
+		}
+	}
 }
+
+int convert(char *date)
+{
+	int day = strtol(date, &date, 10);
+	int month = strtol(++date, &date, 10);
+	int year = strtol(++date, &date, 10);
+	return (year * 12 + month) * 31 + day;
+}
+
+
+
+
