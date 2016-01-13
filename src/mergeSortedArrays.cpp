@@ -21,6 +21,48 @@ struct transaction {
 	char description[20];
 };
 
-struct transaction * mergeSortedArrays(struct transaction *A, int ALen, struct transaction *B, int BLen) {
-	return NULL;
+struct transaction * mergeSortedArrays(struct transaction *A, int ALen, struct transaction *B, int BLen)
+{
+	if (A == NULL || B == NULL)
+		return NULL;
+	int len = ALen + BLen;
+	struct transaction *temp =( struct transaction*)malloc(len*sizeof(struct transaction));
+	int index = 0, index1 = 0, index2 = 0;
+	while (index < ALen&&index1 < BLen)
+	{
+		if (A[index].amount <= B[index1].amount)
+		{
+			temp[index2] = A[index];
+			index++;
+			index2++;
+		}
+		if (A[index].amount>B[index1].amount)
+		{
+			temp[index2] = B[index1];
+			index1++;
+			index2++;
+		}
+
+	}
+	if (index == ALen)
+	{
+		for (index1 = index1; index1 < BLen; index1++)
+		{
+			temp[index2] = B[index1];
+			index2++;
+		}
+	}
+    if (index1 == BLen)
+	{
+		for (index = index; index < ALen; index++)
+		{
+			temp[index2] = A[index];
+			index2++;
+		}
+	}
+	return temp;
 }
+
+
+
+	
