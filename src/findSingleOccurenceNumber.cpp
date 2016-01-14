@@ -26,16 +26,16 @@ int findSingleOccurenceNumber(int *A, int len)
 }
 int sort(int *arr, int size)
 {
-	int index, index1=0, temp;
-	for (index = 0; index1 < size; ++index)
+	int swap;
+	for (int index = 0; index < (size - 1); index++)
 	{
-		for (index1 = index + 1; index1 < size; ++index1)
+		for (int index1 = 0; index1 < size - index - 1; index1++)
 		{
-			if (arr[index]>arr[index1])
+			if (arr[index1] > arr[index1 + 1]) /* For decreasing order use < */
 			{
-				temp = arr[index];
-				arr[index] = arr[index1];
-				arr[index1] = temp;
+				swap = arr[index1];
+				arr[index1] = arr[index1 + 1];
+				arr[index1 + 1] = swap;
 			}
 		}
 	}
